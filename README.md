@@ -39,11 +39,11 @@ Aplikacja ma na celu służyć w swojej prostocie. Podczas tworzenia położono 
 
 Proces uruchomienia aplikacji `ShiftMate` jest niezwykle prosty. Pamiętaj o kilku krokach, które zapewnią Ci płynne przejście do działania:
 
-   1. Na początku upewnij się, że masz zainstalowane wymagane technologie, takie jak `Java` i `Spring`. To właśnie na nich oparta jest nasza aplikacja. Możesz je łatwo           zainstalować, korzystając z oficjalnych stron i dokumentacji.
+   1. Na początku upewnij się, że masz zainstalowane wymagane technologie, takie jak `Java` i `Spring`. To właśnie na nich oparta jest aplikacja. Możesz je łatwo           zainstalować, korzystając z oficjalnych stron i dokumentacji.
 
    2. Następnie przystąp do podstawowej konfiguracji `Java` z frameworkiem `Spring`. Dobra wiadomość jest taka, że istnieją przyjazne przewodniki i instrukcje, które krok         po kroku pokazują, jak to zrobić. Możesz skorzystać z takich materiałów jak: https://spring.io/guides/gs/guides-with-vscode/
 
-   3. Ważne jest również wybranie odpowiedniego środowiska pracy. W naszym przypadku polecamy korzystanie z `Visual Studio Code`, które jest łatwe w obsłudze i oferuje           przydatne narzędzia dla programistów.
+   3. Ważne jest również wybranie odpowiedniego środowiska pracy. W tym przypadku polecam korzystanie z `Visual Studio Code`, które jest łatwe w obsłudze i oferuje           przydatne narzędzia dla programistów.
 
    4. Kiedy już masz gotowe podstawy, czas pobrać projekt z repozytorium `Github` i zaimportować go do swojego wybranego środowiska programistycznego. To może być wybrany         przez Ciebie IDE (np. `Visual Studio Code`) lub inny edytor kodu, który preferujesz.
 
