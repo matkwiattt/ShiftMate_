@@ -15,7 +15,7 @@ Przeznaczenie: Dokumentacja jest przeznaczona zarówno dla użytkowników i prog
 ## 3. Historia zmian
 | Numer wersji | Data       | Autor              | Opis zmian                                 |
 |--------------|------------|--------------------|--------------------------------------------|
-| 1.0          | 2023-05-29 | Michał Stefański <br> Dawid Klimowicz <br> Mateusz Kwiatkowski | Pierwsza wersja aplikacji                  |
+| 1.0          | 2023-09-29 |Mateusz Kwiatkowski | Pierwsza wersja aplikacji                  |
 |              |            |                    | - Stworzono interfejs aplikacji dla pracownika i menagera    |
 |              |            |                    | - Połączenie z bazą danych Firebase      |
 |              |            |                    | - Implementacja logowania i rejestrowania firm |
