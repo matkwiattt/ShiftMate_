@@ -4,67 +4,118 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animated {
+            animation: fadeInUp 0.5s ease-in-out;
+        }
+
+        .custom-form {
+            background-color: #f8f9fa;
+            border-radius: 1rem;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Dodane style dla przycisku */
+        #addPersonBtn {
+            background-color: #87CEEB; /* Baby Blue */
+            color: #fff;
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+        }
+
+        #addPersonBtn:hover {
+            transform: scale(1.1);
+        }
+    </style>
     <title>ShiftMate</title>
 </head>
 <body>
     <div id="content">
-        <nav class="navbar navbar-light" style="background-color: white !important;">
-            <a class="navbar-brand " href="#" >
-                <img  src="https://firebasestorage.googleapis.com/v0/b/shiftmate-f7d4f.appspot.com/o/images%2FS.png?alt=media&token=3b1fd65a-c7a4-4c96-9fbc-4616a35ce68e" width="40" height="40"
-                      class="d-inline-block rounded-circle" alt="" style="">
+        <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand" href="#">
+                <img src="https://firebasestorage.googleapis.com/v0/b/shiftmate-f7d4f.appspot.com/o/images%2FS.png?alt=media&token=3b1fd65a-c7a4-4c96-9fbc-4616a35ce68e" width="40" height="40" class="d-inline-block rounded-circle" alt="">
                 ShiftMate
             </a>
-            <a href="/logout" ><input formaction="/logout" type="button" class="btn btn-secondary" value="Logout" /> </a>
+            <a href="/logout" class="btn btn-secondary">Logout</a>
         </nav>
-        <h2 class="font-weight-bold d-flex justify-content-center"> Add new teammate!</h2>
-        <section class="vh-100 gradient-custom">
-            <div class="container py-5 h-90">
-              <div class="row d-flex justify-content-center align-items-center h-90">
+        <div class="container my-5">
+            <div class="row justify-content-center">
                 <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-                  <div class="card bg-dark text-white" style="border-radius: 1rem;">
-                    <form method="POST" action="/add_people" enctype="multipart/form-data" class="card-body p-5 text-center">
+                    <div id="animatedCard" class="card custom-form animated">
+                        <form method="POST" action="/add_people" enctype="multipart/form-data" class="card-body p-5 text-center">
 
-                        <div class="form-outline form-white mb-4">
-                            <label class="form-label" for="typeEmailX">Email</label>
-    
-                          <input name="email" id="typeEmailX" class="form-control form-control-lg" />
-                        </div>
-                        <div class="form-outline form-white mb-4">
-                            <label class="form-label" for="typePasswordX">Password</label>
-    
-                          <input name="password" type="password" id="typePasswordX" class="form-control form-control-lg" />
-                        </div>
-          
-                        <div class="form-outline form-white mb-4">
-                            <label class="form-label" for="typeNameX">Name</label>
-                          <input name="name" type="text" id="typeNameX" class="form-control form-control-lg" />
-                          
-                        </div>
-                        <p class="small mb-3 pb-lg-2"></p>
-          
-                        <button class="btn btn-outline-light btn-lg px-5" type="submit">Add Person</button>
-          
-                        <div class="d-flex justify-content-center text-center mt-4 pt-1">
-                          <a href="#!" class="text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
-                          <a href="#!" class="text-white"><i class="fab fa-twitter fa-lg mx-4 px-2"></i></a>
-                          <a href="#!" class="text-white"><i class="fab fa-google fa-lg"></i></a>
-                        </div>
-          
+                            <h2 class="mb-4 animated">Add new teammate</h2>
 
-          
-                    
-          
-                    </form>
-                  </div>
+                            <!-- Dodaj ten fragment kodu, który wyświetli komunikat o błędzie -->
+                            <div th:if="${error}" class="alert alert-danger mt-3" role="alert">
+                                <strong>Error:</strong> ${error}
+                            </div>
+                            <!-- Koniec fragmentu kodu dla komunikatu o błędzie -->
+
+                            <div class="form-group">
+                                <label for="typeEmailX" class="text-grey">Email</label>
+                                <input name="email" id="typeEmailX" class="form-control form-control-lg animated" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="typePasswordX" class="text-grey">Password</label>
+                                <input name="password" type="password" id="typePasswordX" class="form-control form-control-lg animated" required />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="typeNameX" class="text-grey">Name</label>
+                                <input name="name" type="text" id="typeNameX" class="form-control form-control-lg animated" required />
+                            </div>
+
+                            <!-- Dodany ID do przycisku -->
+                            <button id="addPersonBtn" class="btn btn-lg btn-block animated" type="submit">Add Person</button>
+
+                        </form>
+                    </div>
                 </div>
-              </div>
             </div>
-          </section>
-
-
+        </div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script>
+        // Dodaj klasę animacyjną po załadowaniu strony
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("animatedCard").classList.add("animated");
+        });
+
+        // Dodane skrypty dla animacji przycisku
+        var addPersonBtn = document.getElementById("addPersonBtn");
+
+        addPersonBtn.addEventListener("mouseenter", function() {
+            anime({
+                targets: '#addPersonBtn',
+                scale: 1.1,
+                duration: 300,
+                easing: 'easeInOutQuad'
+            });
+        });
+
+        addPersonBtn.addEventListener("mouseleave", function() {
+            anime({
+                targets: '#addPersonBtn',
+                scale: 1,
+                duration: 300,
+                easing: 'easeInOutQuad'
+            });
+        });
+    </script>
 </body>
 </html>
