@@ -1,99 +1,182 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ShiftMate</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShiftMate</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.css">
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animated {
+            animation: fadeInUp 0.5s ease-in-out;
+        }
+
+        .custom-form {
+            background-color: #f8f9fa;
+            border-radius: 1rem;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-custom {
+            background-color: #87CEEB; /* Baby Blue */
+            color: #fff;
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+        }
+
+        .btn-custom:hover {
+            background-color: #87CEEB; /* Baby Blue */
+            color: #fff;
+            transform: scale(1.1);
+        }
+
+        .text-grey {
+            color: #6c757d; /* Grey */
+        }
+
+        .text-grey-50 {
+            color: #6c757d; /* Grey */
+        }
+
+        .btn-signup {
+            color: #6c757d; /* Grey */
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+        }
+
+        .btn-signup:hover {
+            color: #000; /* Black */
+            transform: scale(1.1);
+        }
+
+        .background-layer {
+          background: linear-gradient(to bottom right, #87CEEB, #ffffff); /* Zastąp 'url-do-twojego-tla.jpg' adresem do swojego obrazu */
+          background-size: cover;
+          background-position: center;
+          position: fixed;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          z-index: 0;
+        }
+    </style>
 </head>
-
 <body>
-  <section class="vh-100 gradient-custom">
-    <div class="container py-5 h-70">
-      <div class="row d-flex justify-content-center align-items-center h-90">
-        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-          <div class="card bg-dark text-white" style="border-radius: 1rem;">
-            <form th:object="${company}" method="POST" action="/register" enctype="multipart/form-data"
-              class="card-body p-5 text-center">
-              <div class="">
-                <h2>ShiftMate</h2>
-                <h3 class="mb-1">Register</h3>
+    <section class="vh-100 gradient-custom">
+        <div class="container py-5 h-70">
+            <div class="row d-flex justify-content-center align-items-center h-90">
+                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                  <div class="background-layer"></div>
 
-                <div class="form-outline form-white mb-3">
-                  <label class="form-label mb-0" for="typeCompanyNameX">Company Name</label>
-                  <div th:if="${#fields.hasErrors('companyName')}">
-                    <div class="list-unstyled text-danger mb-1">
-                      <div style="font-size: 0.85rem; padding:0;" th:each="err, iterStat : ${companyNameErrors}"
-                        th:text="${err.defaultMessage}" th:if="${iterStat.index == 0}">
-                      </div>
+                    <div class="card custom-form animated">
+                        <form th:object="${company}" method="POST" action="/register" enctype="multipart/form-data" class="card-body p-5 text-center">
+
+                            <div>
+                                <h1 class="display-4 mb-4">ShiftMate</h1>
+                                <h3 class="mb-1">Create Account</h3>
+
+                                <div class="form-outline form-white mb-3">
+                                    <label class="form-label mb-0" for="typeCompanyNameX">Company Name</label>
+                                    <div th:if="${#fields.hasErrors('companyName')}">
+                                        <div class="list-unstyled text-danger mb-1">
+                                            <div style="font-size: 0.85rem; padding:0;" th:each="err, iterStat : ${companyNameErrors}"
+                                                th:text="${err.defaultMessage}" th:if="${iterStat.index == 0}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input name="companyName" type="text" id="typeCompanyNameX" class="form-control form-control-lg" />
+                                </div>
+                                <div class="form-outline form-white mb-3">
+                                    <label class="form-label mb-0" for="typeEmailX">Email</label>
+                                    <div th:if="${#fields.hasErrors('email')}">
+                                        <div class="list-unstyled text-danger mb-1">
+                                            <div style="font-size: 0.85rem; padding:0;" th:each="err, iterStat : ${emailErrors}"
+                                                th:text="${err.defaultMessage}" th:if="${iterStat.index == 0}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input name="email" type="email" id="typeEmailX" class="form-control form-control-lg" />
+                                </div>
+
+                                <div class="form-outline form-white mb-3">
+                                    <label class="form-label mb-0" for="typePasswordX">Password</label>
+                                    <div th:if="${#fields.hasErrors('password')}">
+                                        <div class="list-unstyled text-danger mb-1">
+                                            <div style="font-size: 0.85rem; padding:0;" th:each="err, iterStat : ${passwordErrors}"
+                                                th:text="${err.defaultMessage}" th:if="${iterStat.index == 0}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input name="password" type="password" id="typePasswordX" class="form-control form-control-lg" />
+                                </div>
+                                <div class="form-outline form-white mb-2">
+                                    <label class="form-label mb-0" for="typePasswordX">Confirm password</label>
+                                    <div th:if="${#fields.hasErrors('confirmPassword')}">
+                                        <div class="list-unstyled text-danger mb-1">
+                                            <div style="font-size: 0.85rem; padding:0;" th:each="err, iterStat : ${confirmPasswordErrors}"
+                                                th:text="${err.defaultMessage}" th:if="${iterStat.index == 0}"></div>
+                                        </div>
+                                    </div>
+                                    <input name="confirmPassword" type="password" id="typeConfirmPasswordX" class="form-control form-control-lg" />
+                                </div>
+
+                                <p class="small mb-3 pb-lg-2"></p>
+
+                                <button class="btn btn-outline-light btn-lg px-5 btn-custom" type="submit">Register</button>
+
+                              
+                            </div>
+
+                            <div>
+                                <p class="mb-0 mt-4">Already have an account? <a href="login" class="text-dark font-weight-bold">Login</a></p>
+                            </div>
+                        </form>
                     </div>
-                  </div>
-                  <input name="companyName" type="text" id="typeCompanyNameX" class="form-control form-control-lg" />
                 </div>
-                <div class="form-outline form-white mb-3">
-                  <label class="form-label mb-0" for="typeEmailX">Email</label>
-                  <div th:if="${#fields.hasErrors('email')}">
-                    <div class="list-unstyled text-danger mb-1">
-                      <div style="font-size: 0.85rem; padding:0;" th:each="err, iterStat : ${emailErrors}"
-                        th:text="${err.defaultMessage}" th:if="${iterStat.index == 0}">
-                      </div>
-                    </div>
-                  </div>
-                  <input name="email" type="email" id="typeEmailX" class="form-control form-control-lg" />
-                </div>
-
-                <div class="form-outline form-white mb-3">
-                  <label class="form-label mb-0" for="typePasswordX">Password</label>
-                  <div th:if="${#fields.hasErrors('password')}">
-                    <div class="list-unstyled text-danger mb-1">
-                      <div style="font-size: 0.85rem; padding:0;" th:each="err, iterStat : ${passwordErrors}"
-                        th:text="${err.defaultMessage}" th:if="${iterStat.index == 0}">
-                      </div>
-                    </div>
-                  </div>
-                  <input name="password" type="password" id="typePasswordX" class="form-control form-control-lg" />
-
-                </div>
-                <div class="form-outline form-white mb-2">
-                  <label class="form-label mb-0" for="typePasswordX">Confirm password</label>
-                  <div th:if="${#fields.hasErrors('confirmPassword')}">
-                    <div class="list-unstyled text-danger mb-1">
-                      <div style="font-size: 0.85rem; padding:0;" th:each="err, iterStat : ${confirmPasswordErrors}"
-                        th:text="${err.defaultMessage}" th:if="${iterStat.index == 0}"></div>
-                    </div>
-                  </div>
-                  <input name="confirmPassword" type="password" id="typeConfirmPasswordX"
-                    class="form-control form-control-lg" />
-                </div>
-
-
-
-                <p class="small mb-3 pb-lg-2"></p>
-
-                <button class="btn btn-outline-light btn-lg px-5" type="submit">Register</button>
-
-                <div class="d-flex justify-content-center text-center mt-4 pt-1">
-                  <a href="#!" class="text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
-                  <a href="#!" class="text-white"><i class="fab fa-twitter fa-lg mx-4 px-2"></i></a>
-                  <a href="#!" class="text-white"><i class="fab fa-google fa-lg"></i></a>
-                </div>
-
-              </div>
-
-              <div>
-                <p class="mb-0">Already have an account? <a href="login" class="text-white-50 fw-bold">Login</a>
-                </p>
-              </div>
-
-            </form>
-          </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
-</body>
+    </section>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelector(".custom-form").classList.add("animated");
+        });
+
+        var registerBtn = document.querySelector(".btn-custom");
+
+        registerBtn.addEventListener("mouseenter", function () {
+            anime({
+                targets: '.btn-custom',
+                scale: 1.1,
+                duration: 300,
+                easing: 'easeInOutQuad'
+            });
+        });
+
+        registerBtn.addEventListener("mouseleave", function () {
+            anime({
+                targets: '.btn-custom',
+                scale: 1,
+                duration: 300,
+                easing: 'easeInOutQuad'
+            });
+        });
+    </script>
+</body>
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,21 +7,99 @@
     <title>ShiftMate</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.css">
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animated {
+            animation: fadeInUp 0.5s ease-in-out;
+        }
+
+        .custom-form {
+            background-color: #f8f9fa;
+            border-radius: 1rem;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Dodane style dla przycisku */
+        .btn-custom {
+            background-color: #87CEEB; /* Baby Blue */
+            color: #fff;
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+        }
+
+        .btn-custom:hover {
+            background-color: #87CEEB; /* Baby Blue */
+            color: #fff;
+            transform: scale(1.1);
+        }
+
+        /* Dodane style dla tekstu */
+        .text-grey {
+            color: #6c757d; /* Grey */
+        }
+
+        .text-grey-50 {
+            color: #6c757d; /* Grey */
+        }
+        /* Dodane style dla przycisku Sign Up */
+      .btn-signup {
+          color: #6c757d; /* Grey */
+          transition: all 0.3s ease-in-out;
+          cursor: pointer;
+      }
+
+      .btn-signup:hover {
+          color: #000; /* Black */
+          transform: scale(1.1);
+      }
+
+      /* Dodane style dla tła pod formularzem */
+      .background-layer {
+          background: linear-gradient(to bottom right, #87CEEB, #ffffff); /* Zastąp 'url-do-twojego-tla.jpg' adresem do swojego obrazu */
+          background-size: cover;
+          background-position: center;
+          position: fixed;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          z-index: 0;
+        }
+
+    </style>
 </head>
 <body>
     <section class="vh-100 gradient-custom">
         <div class="container py-5 h-90">
           <div class="row d-flex justify-content-center align-items-center h-90">
             <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-              <div class="card bg-dark text-white" style="border-radius: 1rem;">
+              
+              <!-- Dodana warstwa z tłem -->
+              <div class="background-layer"></div>
+              
+              <div class="card custom-form animated">
                 <form th:object="${company}" method="POST" action="/signing_in" enctype="multipart/form-data" class="card-body p-5 text-center">
       
                   <div class="">
-                    <h2>ShiftMate</h2>
-                    <h3 class="fw-bold mb-1">Login</h3>
+                    <h1 class="display-4 mb-4">ShiftMate</h1>
+                    <h3 class="fw-bold mb-1 text-grey">Login</h3>
       
                     <div class="form-outline form-white mb-4">
-                        <label class="form-label" for="typeEmailX">Email</label>
+                        <label class="form-label text-grey" for="typeEmailX">Email</label>
                         <div th:if="${#fields.hasErrors('email')}">
                           <div class="list-unstyled text-danger mb-1">
                             <div style="font-size: 0.85rem; padding:0;" th:each="err, iterStat : ${loginEmailErrors}"
@@ -32,7 +110,7 @@
                     </div>
       
                     <div class="form-outline form-white mb-0">
-                        <label class="form-label" for="typePasswordX">Password</label>
+                        <label class="form-label text-grey" for="typePasswordX">Password</label>
                         <div th:if="${#fields.hasErrors('password')}">
                           <div class="list-unstyled text-danger mb-1">
                             <div style="font-size: 0.85rem; padding:0;" th:each="err, iterStat : ${loginPasswordErrors}"
@@ -43,21 +121,16 @@
                       
                     </div>
       
-                    <p class="small mb-3 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p>
+                    <p class="small mb-3 pb-lg-2"><a class="text-grey" href="#!">Forgot password?</a></p>
       
-                    <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
-      
-                    <div class="d-flex justify-content-center text-center mt-4 pt-1">
-                      <a href="#!" class="text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
-                      <a href="#!" class="text-white"><i class="fab fa-twitter fa-lg mx-4 px-2"></i></a>
-                      <a href="#!" class="text-white"><i class="fab fa-google fa-lg"></i></a>
-                    </div>
+                    <!-- Użyj klasy stylu dla przycisku -->
+                    <button class="btn btn-outline-light btn-lg px-5 btn-custom" type="submit">Login</button>
+  
       
                   </div>
       
                   <div>
-                    <p class="mb-0">Want to register your company? <a href="register" class="text-white-50 fw-bold">Sign Up</a>
-                    </p>
+                    <p class="mb-0 text-grey-50 mt-4">Want to register your company? <a href="register" class="text-grey-50 fw-bold">Sign Up</a></p>
                   </div>
       
                 </form>
@@ -66,6 +139,55 @@
           </div>
         </div>
       </section>
-</body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script>
+        // Dodaj klasę animacyjną po załadowaniu strony
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelector(".custom-form").classList.add("animated");
+        });
 
+        // Dodane skrypty dla animacji przycisku
+        var loginBtn = document.querySelector(".btn-custom");
+
+        loginBtn.addEventListener("mouseenter", function() {
+            anime({
+                targets: '.btn-custom',
+                scale: 1.1,
+                duration: 300,
+                easing: 'easeInOutQuad'
+            });
+        });
+
+        loginBtn.addEventListener("mouseleave", function() {
+            anime({
+                targets: '.btn-custom',
+                scale: 1,
+                duration: 300,
+                easing: 'easeInOutQuad'
+            });
+        });
+    </script>
+    <script>
+      var signupBtn = document.querySelector(".btn-signup");
+  
+      signupBtn.addEventListener("mouseenter", function() {
+          anime({
+              targets: '.btn-signup',
+              scale: 1.1,
+              duration: 300,
+              easing: 'easeInOutQuad'
+          });
+      });
+  
+      signupBtn.addEventListener("mouseleave", function() {
+          anime({
+              targets: '.btn-signup',
+              scale: 1,
+              duration: 300,
+              easing: 'easeInOutQuad'
+          });
+      });
+  </script>
+  
+</body>
 </html>
